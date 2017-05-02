@@ -21,6 +21,8 @@ import com.darkprograms.speech.recognizer.Recognizer;
 import com.darkprograms.speech.microphone.MicrophoneAnalyzer;
 import javax.sound.sampled.AudioFileFormat.Type;
 import java.applet.*;
+import java.util.Scanner;
+import javafx.embed.swing.JFXPanel;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 import sun.*;
@@ -35,6 +37,8 @@ public class Alarm {
     private static String filename;
     private JFrame frame;
     private JTabbedPane tab_pane;
+    private String f = "audio/nos.mp3";
+    private static final String file = "data.txt";
     
     Alarm(){
         frame = new JFrame();
@@ -44,7 +48,8 @@ public class Alarm {
         
         ClockFrame clock = new ClockFrame();
         AlarmPane alarm = new AlarmPane();
-        allAlarm all_alarm = new allAlarm();
+        alarm.setAlarm(8, 20, f);
+        
         //clock.setSize(500, 350);
         //clock.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //clock.setVisible(true);
@@ -52,7 +57,6 @@ public class Alarm {
         
         tab_pane.addTab("Date & Time", clock.getContentPane());
         tab_pane.addTab("Alarm",alarm.getContentPane());
-        tab_pane.addTab("All Alarm", all_alarm.getContentPane());
         tab_pane.setVisible(true);
         
         
@@ -70,36 +74,23 @@ public class Alarm {
         //JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
         //Calendar cal = Calendar.getInstance();
         //System.out.println(cal.get(Calendar.HOUR_OF_DAY)+ " : " + cal.get(Calendar.MINUTE) + " : " + cal.get(Calendar.SECOND));
+        final JFXPanel fxPanel = new JFXPanel();
         Alarm alarm = new Alarm();
-            filename = "C:\\Users\\edou5\\OneDrive\\Documents\\NetBeansProjects\\Alarm\\src\\audio\\startrek.wav";
-            
-            //InputStream in;
-            AudioStream audio;
-            AudioPlayer mpg = AudioPlayer.player;
-            AudioData data;
-            ContinuousAudioDataStream loop = null;
-            try{
-                InputStream in  = new FileInputStream(filename);
-                audio =new AudioStream(in);
-                data = audio.getData();
-                loop = new ContinuousAudioDataStream(data);
-                
-            }
-            
-            catch(IOException e){
-                //JOptionPane.showMessageDialog(null, e);
-                e.printStackTrace();
-            }
-            
-            mpg.start(loop);
-            
-            
+        alarm.getData();
         }
+    
+    public void getData(){
+        try{
+            File f = new File(file);
+            Scanner sc = new Scanner(f);
             
-            
-        
-        
-        
+            while(sc.hasNextLine()){
+                System.out.println(sc.next());
+            }
+            System.out.println(sc.next());
+        }
+        catch(Exception e){e.printStackTrace();}
+    }
     
     
 }

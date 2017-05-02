@@ -9,40 +9,36 @@ import com.darkprograms.speech.microphone.MicrophoneAnalyzer;
 import java.util.Calendar;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
 
 /**
  *
- * @author edou5
+ * @author edou5l
  */
 public class AlarmNew extends JFrame {
+    private static JTextField textfield2;
     
     private JLabel label;
     private JPanel panel;
+    
     
     public AlarmNew(){
         
     }
     public void createComponent() throws LineUnavailableException{
-      // JFrame frame =new JFrame();
         panel = new JPanel();
-        
-        
-        
-        
         this.setLayout(null);
         setContentPane(panel);
-        
-        
-        
         panel.add(drawForm());
-        
-       // frame.add(panel,BorderLayout.NORTH);
-       // frame.setVisible(true);
     }
     public static JPanel drawForm() throws LineUnavailableException{
         //Set panel with layout and border
@@ -70,18 +66,10 @@ public class AlarmNew extends JFrame {
                     System.out.println("Directory " + listOfFile.getName());
                 }
             }
-        //String[] petStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
-                combo.setSelectedIndex(1);
-         
-        
-        JLabel label1 = new JLabel("subject");
-            form.add(label1);
-        JTextField textfield1 = new JTextField(5);
-            form.add(textfield1);  
-         //form.add(combo);
+            combo.setSelectedIndex(1);
         JLabel label2 = new JLabel("Time");
             form.add(label2);
-        JTextField textfield2 = new JTextField(5);
+         textfield2 = new JTextField(5);
             form.add(textfield2);
         
         JLabel sound = new JLabel("Sound");
@@ -90,14 +78,18 @@ public class AlarmNew extends JFrame {
         JButton calc = new JButton("Save");
             form.add(calc);
             calc.addActionListener(new ActionListener(){
-                public void actionPerformed(Action e){
-                     
-                }
-
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                public void actionPerformed(ActionEvent e){
+                    String DATE_FORMAT_NOW = "HH:mm";
+                    Date date = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
+                    String stringDate = sdf.format(date );
+                    
+                    if(stringDate==textfield2.getText()){
+                        System.out.println("ok ok");
                     }
+                    
+                }
+                    
             });
            
         //Set return
@@ -111,5 +103,15 @@ public class AlarmNew extends JFrame {
         this.setSize(500,300);
         this.setLocationRelativeTo(this);
         this.setVisible(true);
+    }
+    
+    public void playAudio(String file){
+        Media media = new Media(new File(file).toURI().toString());
+        MediaPlayer mediaplayer = new MediaPlayer(media);
+        mediaplayer.play();
+    }
+    
+    public void setTime(String s){
+        
     }
 }

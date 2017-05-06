@@ -28,7 +28,7 @@ import javax.swing.*;
         content.setLayout(new FlowLayout());
         content.add(labelTime);
         this.setContentPane(content);
-        this.setTitle("Oloj Alam");
+        this.setTitle("Clock Alam");
         this.pack();
         this.setLocationRelativeTo(this);
         Timer t = new Timer(1000, new ClockListener());
@@ -37,7 +37,7 @@ import javax.swing.*;
     }
     
     class ClockListener implements ActionListener{
-        
+        //set Clock appear in a label
         public void actionPerformed(ActionEvent e){
             SimpleDateFormat date_format = new SimpleDateFormat("hh : mm : ss");
             labelTime.setText(date_format.format(Calendar.getInstance().getTime()));

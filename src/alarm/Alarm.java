@@ -16,18 +16,14 @@ import javax.swing.*;
 import java.lang.*;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.Media;
-import com.darkprograms.speech.recognizer.GoogleResponse;
-import com.darkprograms.speech.recognizer.Recognizer;
-import com.darkprograms.speech.microphone.MicrophoneAnalyzer;
 import javax.sound.sampled.AudioFileFormat.Type;
 import java.applet.*;
 import java.util.Scanner;
 import javafx.embed.swing.JFXPanel;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.*;
+
 import sun.audio.AudioData;
 import sun.audio.ContinuousAudioDataStream;
+import java.util.*;
 
 /**
  *
@@ -42,13 +38,13 @@ public class Alarm {
     
     Alarm(){
         frame = new JFrame();
-        frame.setSize(new Dimension(400,300));
+        frame.setSize(new Dimension(400,350));
         frame.setLocationRelativeTo(frame);
         tab_pane = new JTabbedPane();
         
-        ClockFrame clock = new ClockFrame();
+        ClockFrame clock = new ClockFrame(); //create a new Object ClockFrame
         AlarmPane alarm = new AlarmPane();
-        alarm.setAlarm(8, 20, f);
+        //alarm.setAlarm(11, 14, f);
         
         //clock.setSize(500, 350);
         //clock.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,21 +72,41 @@ public class Alarm {
         //System.out.println(cal.get(Calendar.HOUR_OF_DAY)+ " : " + cal.get(Calendar.MINUTE) + " : " + cal.get(Calendar.SECOND));
         final JFXPanel fxPanel = new JFXPanel();
         Alarm alarm = new Alarm();
-        alarm.getData();
+        //alarm.getData();
         }
     
-    public void getData(){
+    /* public void getData(){
         try{
             File f = new File(file);
-            Scanner sc = new Scanner(f);
+            Scanner in = new Scanner(f);
             
-            while(sc.hasNextLine()){
-                System.out.println(sc.next());
-            }
-            System.out.println(sc.next());
+            while(in.hasNextLine()) // Checks if there is another line
+            {
+                ArrayList<String> l = new ArrayList<String>();
+                Scanner check = new Scanner(in.nextLine());
+                
+                while(check.hasNext()) // Checks if there is another word in a same line
+                {
+                    l.add(check.next());
+                   //System.out.println(check.next());
+                   //System.out.println(l);
+                   
+                 }
+                String h = l.get(0);
+                String m = l.get(1);
+                String path = l.get(2);
+                
+                System.out.println(h + " " + m + " "+ path);
+                System.out.println(l);
+                
+                
+                
+              }
+            
+            
         }
         catch(Exception e){e.printStackTrace();}
-    }
+    }*/
     
     
 }
